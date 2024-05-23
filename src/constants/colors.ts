@@ -5,5 +5,6 @@ export const COLORS = {
   surface: '#F5F5F5',
   text: '#0F0F0F',
   textSecondary: '#616161',
-  divider: '#E0E0E0',
+  border: '#E0E0E0',
+  placeholder: '#D0D0D0',
 };

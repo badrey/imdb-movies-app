@@ -29,10 +29,6 @@ export function moviesSearchReducer(
         break;
       }
       case MoviesSearchActions.SEARCH_MOVIES.COMPLETE.type: {
-        console.log(
-          'MoviesSearchActions.SEARCH_MOVIES.COMPLETE',
-          action.payload,
-        );
         draft.isLoading = false;
         draft.searchResult = action.payload.results;
         break;

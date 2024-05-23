@@ -5,15 +5,20 @@ import {Alert} from 'react-native';
 
 type Action = ReturnType<typeof MoviesSearchActions.SEARCH_MOVIES.START.create>;
 
+async function callSearchApi(searchValue: string) {
+  if (searchValue) {
+    return Api.movies.searchMovies(searchValue);
+  }
+  return Api.movies.getRandomMovies();
+}
+
 export function* searchMoviesSaga(action: Action) {
   const {searchValue} = action.payload;
   try {
-    console.log({searchValue});
-    const results: SagaReturnType<typeof Api.movies.searchMovies> = yield call(
-      Api.movies.searchMovies,
+    const results: SagaReturnType<typeof callSearchApi> = yield call(
+      callSearchApi,
       searchValue,
     );
-    console.log({results});
     yield put(MoviesSearchActions.SEARCH_MOVIES.COMPLETE.create({results}));
   } catch (error) {
     console.error(error);

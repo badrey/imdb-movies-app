@@ -1,13 +1,16 @@
 import axios from 'axios';
 import {MovieData, MovieDescription, QueryApiResponse} from './types.ts';
 import {ApiError} from '../ApiError.ts';
+import {getRandomLetter, getRandomMovieFromList} from './utils.ts';
 
 const API_URL = 'https://search.imdbot.workers.dev';
 
 const searchMovies = async (query: string): Promise<MovieData[]> => {
-  console.log('searchMovies', {query});
-  const response = await axios.get<QueryApiResponse>(`${API_URL}/?q=${query}`);
-  console.log(response.data);
+  const searchValue = query.toLowerCase();
+  console.log('searchMovies', {searchValue});
+  const response = await axios.get<QueryApiResponse>(
+    `${API_URL}/?q=${searchValue}`,
+  );
   if (!response.data.ok) {
     throw new ApiError(
       'Error during movies search call',
@@ -28,6 +31,19 @@ const searchMovies = async (query: string): Promise<MovieData[]> => {
   }));
 };
 
+const getRandomMovies = async (
+  moviesNumber: number = 10,
+): Promise<MovieData[]> => {
+  console.log('getRandomMovies');
+  const randomLetters = Array.from({length: moviesNumber}, getRandomLetter);
+  console.log({randomLetters});
+  const movieResults = await Promise.all(
+    randomLetters.map(letter => searchMovies(letter)),
+  );
+
+  return movieResults.map(movies => getRandomMovieFromList(movies));
+};
+
 const getMovieDetails = async (id: string) => {
   const response = await axios.get(`${API_URL}/id/${id}`);
   return response.data;
@@ -35,5 +51,6 @@ const getMovieDetails = async (id: string) => {
 
 export const movies = {
   searchMovies,
+  getRandomMovies,
   getMovieDetails,
 };
