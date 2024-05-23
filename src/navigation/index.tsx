@@ -30,10 +30,7 @@ function NavStack() {
       <Stack.Screen
         component={DetailsScreen}
         name="DetailsScreen"
-        options={({route}) => ({
-          headerTitle: route.params?.name || 'Details',
-          headerBackTitle: 'Home',
-        })}
+        options={{headerTitle: 'Details', headerBackTitle: 'Home'}}
       />
     </Stack.Navigator>
   );

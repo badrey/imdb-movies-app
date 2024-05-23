@@ -13,6 +13,11 @@ import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {HomeScreenNavigationProp} from '../../../../navigation/types.ts';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+import {
+  BORDER_RADIUS,
+  DEFAULT_OFFSET,
+  MOVIE_POSTER_ASPECT_RATIO,
+} from '../../../constants.ts';
 
 export const windowWidth = Dimensions.get('window').width;
 
@@ -20,9 +25,7 @@ type MovieTileProps = {
   movieData: MovieData;
 };
 
-const BORDER_RADIUS = rem(16);
-const IMAGE_ASPECT_RATIO = 0.673289183222958;
-const PADDING_HORIZONTAL = rem(16);
+const PADDING_HORIZONTAL = DEFAULT_OFFSET;
 const FONT_SIZE = rem(17);
 
 export function MovieTileLoader() {
@@ -36,7 +39,7 @@ export function MovieTileLoader() {
           <SkeletonPlaceholder.Item
             borderRadius={BORDER_RADIUS}
             width={'30%'}
-            aspectRatio={IMAGE_ASPECT_RATIO}
+            aspectRatio={MOVIE_POSTER_ASPECT_RATIO}
           />
           <SkeletonPlaceholder.Item
             borderRadius={BORDER_RADIUS}
@@ -55,16 +58,9 @@ export function MovieTile({movieData}: MovieTileProps) {
   const name = movieData.aka || movieData.title;
   return (
     <TouchableOpacity
-      onPress={() =>
-        navigation.push('DetailsScreen', {id: movieData.id, name})
-      }>
+      onPress={() => navigation.push('DetailsScreen', {movieData: movieData})}>
       <View style={styles.container}>
-        <Image
-          style={styles.image}
-          source={{uri: movieData.poster?.url}}
-          height={movieData.poster?.height}
-          width={movieData.poster?.width}
-        />
+        <Image style={styles.image} source={{uri: movieData.poster?.url}} />
         <Text style={styles.text}>{name}</Text>
       </View>
     </TouchableOpacity>
@@ -83,13 +79,13 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '30%',
-    aspectRatio: IMAGE_ASPECT_RATIO,
+    aspectRatio: MOVIE_POSTER_ASPECT_RATIO,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: COLORS.border,
     backgroundColor: COLORS.placeholder,
-    borderRadius: rem(16),
+    borderRadius: BORDER_RADIUS,
   },
   text: {
     paddingStart: rem(12),

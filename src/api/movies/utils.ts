@@ -5,6 +5,13 @@ export const getRandomLetter = (): string => {
   return characters.charAt(Math.floor(Math.random() * characters.length));
 };
 
-export const getRandomMovieFromList = (movies: MovieData[]): MovieData => {
-  return movies[Math.floor(Math.random() * movies.length)];
+export const getRandomMovieFromList = (
+  movies: MovieData[],
+  selectedIds: Set<string>,
+): MovieData | null => {
+  const availableMovies = movies.filter(movie => !selectedIds.has(movie.id));
+  if (availableMovies.length === 0) {
+    return null;
+  }
+  return availableMovies[Math.floor(Math.random() * availableMovies.length)];
 };

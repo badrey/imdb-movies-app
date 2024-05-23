@@ -1,8 +1,9 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {MovieData} from '../api/movies/types.ts';
 
 export type RootStackParamList = {
   HomeScreen: undefined;
-  DetailsScreen: {id: string; name: string};
+  DetailsScreen: {movieData: MovieData};
 };
 
 export type HomeScreenNavigationProp = NativeStackNavigationProp<

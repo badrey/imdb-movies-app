@@ -1,8 +1,9 @@
-import {call, cancel, fork, take} from 'redux-saga/effects';
+import {call, cancel, fork, take, takeLatest} from 'redux-saga/effects';
 import {MoviesSearchActions} from '../actions';
 import {searchMoviesSaga} from './searchMovies.ts';
 import {Task} from 'redux-saga';
 import {wait} from 'rn-units';
+import {fetchMovieDetailsSaga} from './fetchMovieDetails.ts';
 
 const LIVE_DEBOUNCE_MS = 757;
 
@@ -28,4 +29,10 @@ function* watchSearchMovies() {
   }
 }
 
-export const moviesSearchWatchers = [fork(watchSearchMovies)];
+export const moviesSearchWatchers = [
+  fork(watchSearchMovies),
+  takeLatest(
+    MoviesSearchActions.FETCH_DETAILS.START.type,
+    fetchMovieDetailsSaga,
+  ),
+];

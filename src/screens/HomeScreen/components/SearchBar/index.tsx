@@ -3,6 +3,7 @@ import {rem} from 'rn-units';
 import {COLORS} from '../../../../constants/colors.ts';
 import React from 'react';
 import {Images} from '../../../../assets/images';
+import {BORDER_RADIUS, DEFAULT_OFFSET} from '../../../constants.ts';
 
 type Props = {
   searchText: string;
@@ -37,7 +38,7 @@ export function SearchBar({searchText, onSearchTextChange}: Props) {
 
 const styles = StyleSheet.create({
   outerContainer: {
-    padding: rem(16),
+    padding: DEFAULT_OFFSET,
     width: '100%',
     backgroundColor: COLORS.background,
   },
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: rem(16),
+    borderRadius: BORDER_RADIUS,
     padding: rem(12),
     backgroundColor: COLORS.surface,
     borderWidth: 1,
