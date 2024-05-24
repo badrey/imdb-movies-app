@@ -85,7 +85,7 @@ const getMovieDetails = async (
     cast: details.main.cast.edges
       .map(edge => ({
         actorName: normaliseText(edge?.node?.name?.nameText?.text ?? ''),
-        characterName: normaliseText(edge?.node?.characters[0].name ?? ''),
+        characterName: normaliseText(edge?.node?.characters?.[0]?.name ?? ''),
         primaryImage: edge?.node?.name?.primaryImage
           ? edge?.node?.name?.primaryImage
           : null,

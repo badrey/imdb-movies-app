@@ -6,11 +6,11 @@ import {BORDER_RADIUS, DEFAULT_OFFSET} from '../../../constants.ts';
 import {rem} from 'rn-units';
 import React from 'react';
 
-type MovieDescriptionProps = {
+type Props = {
   moviesDetails: MovieDetailsData;
 };
 
-export function MovieDescription({moviesDetails}: MovieDescriptionProps) {
+export function MovieDescription({moviesDetails}: Props) {
   if (!moviesDetails.description) {
     return null;
   }
@@ -47,8 +47,9 @@ const styles = StyleSheet.create({
   },
   description: {
     paddingTop: rem(10),
-    color: COLORS.text,
+    color: COLORS.textSecondary,
     fontSize: rem(15),
+    lineHeight: rem(20),
     fontWeight: 'normal',
   },
   keywordsContainer: {

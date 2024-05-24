@@ -7,11 +7,11 @@ import {rem} from 'rn-units';
 import React from 'react';
 import {CastTile} from './CastTile';
 
-type MovieDescriptionProps = {
+type Props = {
   moviesDetails: MovieDetailsData;
 };
 
-export function MovieCast({moviesDetails}: MovieDescriptionProps) {
+export function MovieCast({moviesDetails}: Props) {
   if (!moviesDetails.cast?.length) {
     return null;
   }

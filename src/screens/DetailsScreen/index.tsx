@@ -18,11 +18,14 @@ import {MoviesSearchActions} from '../../store/modules/MoviesSearch/actions';
 import {MovieDescription} from './components/MovieDescription';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {MovieCast} from './components/MovieCast';
+import {Loader} from './components/Loader';
+import {MovieFeaturedReview} from './components/MovieFeaturedReview';
 
 export function DetailsScreen() {
   const safeAreaInsets = useSafeAreaInsets();
   const route = useRoute<RouteProp<RootStackParamList, 'DetailsScreen'>>();
   const {movieData} = route.params;
+  console.log(movieData);
 
   const moviesDetails = useSelector(moviesDetailsSelector(movieData.id));
   const moviesDetailsLoading = useSelector(moviesDetailsLoadingSelector);
@@ -54,8 +57,10 @@ export function DetailsScreen() {
         <>
           <MovieDescription moviesDetails={moviesDetails} />
           <MovieCast moviesDetails={moviesDetails} />
+          <MovieFeaturedReview moviesDetails={moviesDetails} />
         </>
       ) : null}
+      {isLoading ? <Loader /> : null}
     </ScrollView>
   );
 }
