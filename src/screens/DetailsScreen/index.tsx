@@ -25,7 +25,6 @@ export function DetailsScreen() {
   const safeAreaInsets = useSafeAreaInsets();
   const route = useRoute<RouteProp<RootStackParamList, 'DetailsScreen'>>();
   const {movieData} = route.params;
-  console.log(movieData);
 
   const moviesDetails = useSelector(moviesDetailsSelector(movieData.id));
   const moviesDetailsLoading = useSelector(moviesDetailsLoadingSelector);
@@ -45,7 +44,7 @@ export function DetailsScreen() {
       showsVerticalScrollIndicator={false}
       contentContainerStyle={[
         styles.contentContainer,
-        {paddingBottom: safeAreaInsets.bottom},
+        {paddingBottom: safeAreaInsets.bottom + DEFAULT_OFFSET},
       ]}>
       <View style={styles.paddingContainer}>
         <Text style={styles.text}>{movieData.aka || movieData.title}</Text>

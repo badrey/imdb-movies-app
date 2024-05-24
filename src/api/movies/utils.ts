@@ -1,4 +1,4 @@
-import {MovieData} from './types.ts';
+import {MovieData} from './types';
 
 export const getRandomLetter = (): string => {
   const characters = 'abcdefghijklmnopqrstuvwxyz';
@@ -15,3 +15,19 @@ export const getRandomMovieFromList = (
   }
   return availableMovies[Math.floor(Math.random() * availableMovies.length)];
 };
+
+const SYMBOLS_MAPPING: {[key: string]: string} = {
+  '&quot;': '"',
+  '&amp;': '&',
+  '&lt;': '<',
+  '&gt;': '>',
+  '&nbsp;': ' ',
+  '&apos;': "'",
+};
+
+export function normaliseText(text: string): string {
+  return text.replace(
+    /&quot;|&amp;|&lt;|&gt;|&nbsp;|&apos;/g,
+    match => SYMBOLS_MAPPING[match],
+  );
+}

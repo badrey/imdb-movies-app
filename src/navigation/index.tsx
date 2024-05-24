@@ -4,7 +4,7 @@ import {COLORS} from '../constants/colors.ts';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {HomeScreen} from '../screens/HomeScreen';
 import {DetailsScreen} from '../screens/DetailsScreen';
-import {RootStackParamList} from './types.ts';
+import {RootStackParamList} from './types';
 
 const MyDarkTheme = {
   ...DarkTheme,

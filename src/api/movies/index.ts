@@ -5,10 +5,9 @@ import {
   MovieDescription,
   MovieDetailsData,
   QueryApiResponse,
-} from './types.ts';
-import {ApiError} from '../ApiError.ts';
-import {getRandomLetter, getRandomMovieFromList} from './utils.ts';
-import {normaliseText} from '../../utils/string.ts';
+} from './types';
+import {ApiError} from '../ApiError';
+import {getRandomLetter, getRandomMovieFromList, normaliseText} from './utils';
 
 const API_URL = 'https://search.imdbot.workers.dev';
 
